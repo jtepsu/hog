@@ -163,36 +163,48 @@ def play(strategy0, strategy1, update, score0=0, score1=0, dice=six_sided, goal=
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+
+    "Debug-able version"
+    # # defining variables and establishing their values pre-game
+    # print(f"DEBUG: Player {who}'s turn, player {abs(who - 1)} is the opponent.")
+    # strategy = lambda: strategy0 if who == 0 else strategy1
+    # self_score = lambda: score0 if who == 0 else score1
+    # opp_score = lambda: score1 if who == 0 else score0
+    # print(f"DEBUG: player {who} wants to roll the dice {strategy()(self_score(), opp_score())} times.")
+    # print(f"DEBUG: player {who}'s score is currently {self_score()}.")
+    # print(f"DEBUG: The opponent's score is currently {opp_score()}.")
+    # print(f"DEBUG: The goal score is {goal}.")
+    # print(f"DEBUG: The dice is {dice}.")
+    # print("DEBUG: Starting game...")
+
+
+    # # # gameplay loop
+    # while (score0 < goal) and (score1 < goal):
+    #     print(f"DEBUG: Player {who}'s turn. Score0 is {score0}, score1 is {score1}.")
+    #     new_score = update(strategy()(self_score(), opp_score()), self_score(), opp_score(), dice)
+    #     print(f"DEBUG: Player {who}'s new score is {new_score}.")
+    #     if who == 0:
+    #         score0 = new_score
+    #     else:
+    #         score1 = new_score
+    #     print(f"DEBUG: Score0 is now {score0}, score1 is now {score1}.")
+    #     who = abs(who - 1)
+
+
+    "working version"
     # defining variables and establishing their values pre-game
-    print(f"DEBUG: Player {who}'s turn, player {abs(who - 1)} is the opponent.")
     strategy = lambda: strategy0 if who == 0 else strategy1
     self_score = lambda: score0 if who == 0 else score1
     opp_score = lambda: score1 if who == 0 else score0
-    print(f"DEBUG: player {who} wants to roll the dice {strategy()(self_score(), opp_score())} times.")
-    print(f"DEBUG: player {who}'s score is currently {self_score()}.")
-    print(f"DEBUG: The opponent's score is currently {opp_score()}.")
-    print(f"DEBUG: The goal score is {goal}.")
-    print(f"DEBUG: The dice is {dice}.")
-    print("DEBUG: Starting game...")
 
-
-    # # gameplay loop
+    # gameplay loop
     while (score0 < goal) and (score1 < goal):
-        print(f"DEBUG: Player {who}'s turn. Score0 is {score0}, score1 is {score1}.")
         new_score = update(strategy()(self_score(), opp_score()), self_score(), opp_score(), dice)
-        print(f"DEBUG: Player {who}'s new score is {new_score}.")
         if who == 0:
             score0 = new_score
         else:
             score1 = new_score
-        print(f"DEBUG: Score0 is now {score0}, score1 is now {score1}.")
         who = abs(who - 1)
-
-
-
-    
-
-
 
     # END PROBLEM 5
     return score0, score1
