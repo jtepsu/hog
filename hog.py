@@ -163,21 +163,41 @@ def play(strategy0, strategy1, update, score0=0, score1=0, dice=six_sided, goal=
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    # defining variables and establishing their values pre-game
+    print(f"DEBUG: Player {who}'s turn, player {abs(who - 1)} is the opponent.")
+    strategy = lambda: strategy0 if who == 0 else strategy1
+    self_score = lambda: score0 if who == 0 else score1
+    opp_score = lambda: score1 if who == 0 else score0
+    print(f"DEBUG: player {who} wants to roll the dice {strategy()(self_score(), opp_score())} times.")
+    print(f"DEBUG: player {who}'s score is currently {self_score()}.")
+    print(f"DEBUG: The opponent's score is currently {opp_score()}.")
+    print(f"DEBUG: The goal score is {goal}.")
+    print(f"DEBUG: The dice is {dice}.")
+    print("DEBUG: Starting game...")
 
-    # while (score0 < GOAL) and (score1 < GOAL):
-    #     if who == 0:
-    #         score_self, score_opp, strategy = score0, score1, strategy0
-    #     else:
-    #         score_self, score_opp, strategy = score1, score0, strategy1
-    #     score_self = update(strategy(score_self, score_opp), score_self, score_opp, dice)
-    #     print(f"player {who}'s score is {score_self}, the opponent's score is {score_opp}")
-    #     who = abs(who - 1)
-    "This doesn't work, need full rewrite probably. scores don't update when we want them to unless we use lmabda?"
+
+    # # gameplay loop
+    while (score0 < goal) and (score1 < goal):
+        print(f"DEBUG: Player {who}'s turn. Score0 is {score0}, score1 is {score1}.")
+        new_score = update(strategy()(self_score(), opp_score()), self_score(), opp_score(), dice)
+        print(f"DEBUG: Player {who}'s new score is {new_score}.")
+        if who == 0:
+            score0 = new_score
+        else:
+            score1 = new_score
+        print(f"DEBUG: Score0 is now {score0}, score1 is now {score1}.")
+        who = abs(who - 1)
+
+
+
+    
+
+
 
     # END PROBLEM 5
     return score0, score1
 
-play(always_roll_5, always_roll_5, simple_update, 10, 20, six_sided, 100) # manual debug
+# play(always_roll_5, always_roll_5, simple_update, 10, 20, six_sided, 100) # manual debug
 
 
 #######################
