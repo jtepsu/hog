@@ -234,6 +234,9 @@ def always_roll(n):
 
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
+    def f(score, opp_score):
+        return n
+    return f
     # END PROBLEM 6
 
 
@@ -266,6 +269,14 @@ def is_always_roll(strategy, goal=GOAL):
     """
     # BEGIN PROBLEM 7
     "*** YOUR CODE HERE ***"
+    # brute force method
+    num_rolls = strategy(0, 0)
+    for i in range(0, goal):
+        for j in range(0, goal):
+            if num_rolls != strategy(i, j):
+                return False
+    return True
+
     # END PROBLEM 7
 
 
@@ -283,6 +294,7 @@ def make_averaged(original_function, times_called=1000):
 
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    
     # END PROBLEM 8
 
 
