@@ -294,7 +294,12 @@ def make_averaged(original_function, times_called=1000):
 
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
-    
+    def f(*args):
+        result = 0
+        for i in range(times_called):
+            result += original_function(*args)
+        return result / times_called
+    return f
     # END PROBLEM 8
 
 
