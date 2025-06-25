@@ -165,7 +165,7 @@ def play(strategy0, strategy1, update, score0=0, score1=0, dice=six_sided, goal=
     "*** YOUR CODE HERE ***"
 
     "Debug-able version"
-    # # defining variables and establishing their values pre-game
+    # defining variables and establishing their values pre-game
     # print(f"DEBUG: Player {who}'s turn, player {abs(who - 1)} is the opponent.")
     # strategy = lambda: strategy0 if who == 0 else strategy1
     # self_score = lambda: score0 if who == 0 else score1
@@ -209,7 +209,7 @@ def play(strategy0, strategy1, update, score0=0, score1=0, dice=six_sided, goal=
     # END PROBLEM 5
     return score0, score1
 
-# play(always_roll_5, always_roll_5, simple_update, 10, 20, six_sided, 100) # manual debug
+play(always_roll_5, always_roll_5, simple_update, 10, 20, six_sided, 100) # manual debug
 
 
 #######################
@@ -313,6 +313,16 @@ def max_scoring_num_rolls(dice=six_sided, times_called=1000):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    max_result = 0
+    max_i = 0
+    for i in range(1, 11):
+        averaged_dice = make_averaged(roll_dice, times_called)
+        result = averaged_dice(i, dice)
+        if result > max_result:
+            max_result = result
+            max_i = i
+    return max_i
+
     # END PROBLEM 9
 
 
@@ -358,7 +368,10 @@ def boar_strategy(score, opponent_score, threshold=11, num_rolls=6):
     points, and returns NUM_ROLLS otherwise. Ignore the Sus Fuss rule.
     """
     # BEGIN PROBLEM 10
-    return num_rolls  # Remove this line once implemented.
+    if boar_brawl(score, opponent_score) >= threshold:
+        return 0
+    else:
+        return num_rolls
     # END PROBLEM 10
 
 
@@ -367,7 +380,10 @@ def sus_strategy(score, opponent_score, threshold=11, num_rolls=6):
     THRESHOLD points, and returns NUM_ROLLS otherwise. Consider both the Boar Brawl and
     Suss Fuss rules."""
     # BEGIN PROBLEM 11
-    return num_rolls  # Remove this line once implemented.
+    if sus_update(0, score, opponent_score) - score >= threshold:
+        return 0
+    else:
+        return num_rolls
     # END PROBLEM 11
 
 
@@ -377,6 +393,7 @@ def final_strategy(score, opponent_score):
     *** YOUR DESCRIPTION HERE ***
     """
     # BEGIN PROBLEM 12
+    
     return 6  # Remove this line once implemented.
     # END PROBLEM 12
 
